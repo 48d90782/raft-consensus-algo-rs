@@ -1,9 +1,29 @@
-[package]
-name = "raft-consensus-algo-rs"
-version = "0.1.0"
-authors = ["Valery Piashchynski <piashchynski.valery@gmail.com>"]
-edition = "2018"
+[workspace]
+members = [
+    "crates/labcodec",
+    "crates/labrpc",
+    "crates/linearizability",
+    "crates/raft"
+]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.dev]
+opt-level = 0
+debug = true
+debug-assertions = true
+overflow-checks = true
+lto = false
+panic = 'unwind'
+incremental = true
+codegen-units = 16
+rpath = false
 
-[dependencies]
+[profile.release]
+opt-level = 3
+lto = "fat"
+debug = false
+debug-assertions = false
+overflow-checks = false
+panic = 'unwind'
+incremental = false
+rpath = false
+codegen-units = 1
